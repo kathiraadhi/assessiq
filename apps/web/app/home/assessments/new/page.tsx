@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from '@kit/ui/select';
 
+import { createAssessment } from '../actions';
+
 export default function NewAssessmentPage() {
   const router = useRouter();
   const [title, setTitle] = useState('');
@@ -23,15 +25,23 @@ export default function NewAssessmentPage() {
   const [level, setLevel] = useState('');
   const [timeLimit, setTimeLimit] = useState('60');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    // We will connect this to Supabase in the next step
-    console.log({ title, domain, level, timeLimit });
-
-    setLoading(false);
+    setError('');
+    try {
+      await createAssessment({
+        title,
+        domain_slug: domain,
+        level,
+        time_limit: parseInt(timeLimit),
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong');
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,26 +50,27 @@ export default function NewAssessmentPage() {
         title={'New Assessment'}
         description={'Create a new hiring assessment'}
       />
-
       <PageBody>
         <div className={'max-w-2xl'}>
           <form onSubmit={handleSubmit} className={'flex flex-col space-y-6'}>
-            {/* Title */}
+            {error && (
+              <div className={'rounded-md bg-red-50 p-4 text-sm text-red-600'}>
+                {error}
+              </div>
+            )}
             <div className={'flex flex-col space-y-2'}>
               <Label htmlFor={'title'}>Assessment Title</Label>
               <Input
                 id={'title'}
-                placeholder={'e.g. SAP FICO Consultant - Level 2'}
+                placeholder={'e.g. English Comprehension - Level 1'}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
-
-            {/* Domain */}
             <div className={'flex flex-col space-y-2'}>
               <Label>Domain</Label>
-              <Select value={domain} onValueChange={setDomain} required>
+              <Select value={domain} onValueChange={setDomain}>
                 <SelectTrigger>
                   <SelectValue placeholder={'Select a domain'} />
                 </SelectTrigger>
@@ -70,11 +81,9 @@ export default function NewAssessmentPage() {
                 </SelectContent>
               </Select>
             </div>
-
-            {/* Level */}
             <div className={'flex flex-col space-y-2'}>
               <Label>Level</Label>
-              <Select value={level} onValueChange={setLevel} required>
+              <Select value={level} onValueChange={setLevel}>
                 <SelectTrigger>
                   <SelectValue placeholder={'Select a level'} />
                 </SelectTrigger>
@@ -85,8 +94,6 @@ export default function NewAssessmentPage() {
                 </SelectContent>
               </Select>
             </div>
-
-            {/* Time Limit */}
             <div className={'flex flex-col space-y-2'}>
               <Label htmlFor={'timeLimit'}>Time Limit (minutes)</Label>
               <Input
@@ -99,8 +106,6 @@ export default function NewAssessmentPage() {
                 required
               />
             </div>
-
-            {/* Buttons */}
             <div className={'flex space-x-4'}>
               <Button type={'submit'} disabled={loading}>
                 {loading ? 'Creating...' : 'Create Assessment'}
