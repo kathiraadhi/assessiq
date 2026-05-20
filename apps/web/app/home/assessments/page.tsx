@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { PlusCircle } from 'lucide-react';
 
 import { Button } from '@kit/ui/button';
@@ -10,9 +12,11 @@ export default function AssessmentsPage() {
         title={'Assessments'}
         description={'Create and manage your hiring assessments'}
       >
-        <Button>
-          <PlusCircle className={'mr-2 h-4 w-4'} />
-          New Assessment
+        <Button asChild>
+          <Link href={'/home/assessments/new'}>
+            <PlusCircle className={'mr-2 h-4 w-4'} />
+            New Assessment
+          </Link>
         </Button>
       </PageHeader>
 
@@ -23,9 +27,11 @@ export default function AssessmentsPage() {
             <p className={'text-muted-foreground mt-2 text-sm'}>
               Create your first assessment to start screening candidates.
             </p>
-            <Button className={'mt-4'}>
-              <PlusCircle className={'mr-2 h-4 w-4'} />
-              Create Assessment
+            <Button className={'mt-4'} asChild>
+              <Link href={'/home/assessments/new'}>
+                <PlusCircle className={'mr-2 h-4 w-4'} />
+                Create Assessment
+              </Link>
             </Button>
           </div>
         </div>
