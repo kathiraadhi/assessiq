@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { ArrowRightIcon, LayoutDashboard } from 'lucide-react';
+import { ArrowRightIcon } from 'lucide-react';
 
 import {
   CtaButton,
@@ -23,34 +22,23 @@ function Home() {
         <Hero
           pill={
             <Pill label={'New'}>
-              <span>The leading SaaS Starter Kit for ambitious developers</span>
+              <span>AI-powered assessments for ERP & technical consulting</span>
             </Pill>
           }
           title={
             <>
-              <span>The ultimate SaaS Starter</span>
-              <span>for your next project</span>
+              <span>Hire better SAP, Salesforce</span>
+              <span>& ServiceNow talent</span>
             </>
           }
           subtitle={
             <span>
-              Build and Ship a SaaS faster than ever before with the next-gen
-              SaaS Starter Kit. Ship your SaaS in days, not months.
+              AssessIQ generates domain-specific technical assessments in 30
+              seconds. Built for consulting firms and IT staffing companies.
+              Ready in 30 minutes. Priced for teams that aren't Fortune 500.
             </span>
           }
           cta={<MainCallToActionButton />}
-          image={
-            <Image
-              priority
-              className={
-                'dark:border-primary/10 rounded-2xl border border-gray-200'
-              }
-              width={3558}
-              height={2222}
-              src={`/images/dashboard.webp`}
-              alt={`App Image`}
-            />
-          }
         />
       </div>
 
@@ -62,47 +50,45 @@ function Home() {
             heading={
               <>
                 <b className="font-semibold dark:text-white">
-                  The ultimate SaaS Starter Kit
-                </b>
-                .{' '}
+                  Domain-specific hiring assessment.
+                </b>{' '}
                 <span className="text-muted-foreground font-normal">
-                  Unleash your creativity and build your SaaS faster than ever
-                  with Makerkit.
+                  Stop using Google Forms. Start screening candidates the right
+                  way.
                 </span>
               </>
             }
             icon={
               <FeatureShowcaseIconContainer>
-                <LayoutDashboard className="h-5" />
-                <span>All-in-one solution</span>
+                <span>Everything you need</span>
               </FeatureShowcaseIconContainer>
             }
           >
             <FeatureGrid>
               <FeatureCard
                 className={'relative col-span-2 overflow-hidden'}
-                label={'Beautiful Dashboard'}
-                description={`Makerkit provides a beautiful dashboard to manage your SaaS business.`}
+                label={'AI-Generated Assessments'}
+                description={`Enter a role and experience level — get a complete 20-question assessment in 30 seconds. SAP, Salesforce, ServiceNow and more.`}
               />
 
               <FeatureCard
                 className={
                   'relative col-span-2 w-full overflow-hidden lg:col-span-1'
                 }
-                label={'Authentication'}
-                description={`Makerkit provides a variety of providers to allow your users to sign in.`}
+                label={'AI Answer Evaluation'}
+                description={`Free-text answers are evaluated by AI instantly. Every score includes reasoning so recruiters understand why.`}
               />
 
               <FeatureCard
                 className={'relative col-span-2 overflow-hidden lg:col-span-1'}
-                label={'Multi Tenancy'}
-                description={`Multi tenant memberships for your SaaS business.`}
+                label={'Ready in 30 Minutes'}
+                description={`Sign up, pick a domain, send your first assessment — all in under 30 minutes. No implementation consultant needed.`}
               />
 
               <FeatureCard
                 className={'relative col-span-2 overflow-hidden'}
-                label={'Billing'}
-                description={`Makerkit supports multiple payment gateways to charge your customers.`}
+                label={'Priced for SMBs'}
+                description={`Starting at ₹4,999/month. No enterprise contracts, no minimum commitments, no hidden fees.`}
               />
             </FeatureGrid>
           </FeatureShowcase>
@@ -123,13 +109,7 @@ function MainCallToActionButton() {
             <span>
               <Trans i18nKey={'common:getStarted'} />
             </span>
-
-            <ArrowRightIcon
-              className={
-                'animate-in fade-in slide-in-from-left-8 h-4' +
-                ' zoom-in fill-mode-both delay-1000 duration-1000'
-              }
-            />
+            <ArrowRightIcon className={'h-4'} />
           </span>
         </Link>
       </CtaButton>
